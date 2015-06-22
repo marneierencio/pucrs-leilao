@@ -41,10 +41,18 @@ public class Lote {
         this.bens = bens;
     }
 
+    public void addBem(Bem bem) {
+        this.bens.add(bem);
+    }
+    
+    public void removeBem(Bem bem) {
+        this.bens.remove(bem);
+    }
+
     public Integer getVersao() {
         return versao;
     }
-
+    
     public void setVersao(Integer versao) {
         this.versao = versao;
     }

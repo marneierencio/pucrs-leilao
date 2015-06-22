@@ -5,6 +5,7 @@
  */
 package negocio.pojos;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Date;
 public class Lance {
 
     private Integer codigo;
-    private Date dataHora;
+    private Date data;
+    private Time hora;
     private Double valor;
     private Usuario usuario;
     private Leilao leilao;
@@ -23,9 +25,10 @@ public class Lance {
     public Lance() {
     }
 
-    public Lance(Integer codigo, Date dataHora, Double valor, Usuario usuario, Leilao leilao, Integer versao) {
+    public Lance(Integer codigo, Date data, Time hora, Double valor, Usuario usuario, Leilao leilao, Integer versao) {
         this.codigo = codigo;
-        this.dataHora = dataHora;
+        this.data = data;
+        this.hora = hora;
         this.valor = valor;
         this.usuario = usuario;
         this.leilao = leilao;
@@ -40,12 +43,20 @@ public class Lance {
         this.codigo = codigo;
     }
 
-    public Date getDataHora() {
-        return dataHora;
+    public Date getData() {
+        return data;
     }
 
-    public void setDataHora(Date dataHora) {
-        this.dataHora = dataHora;
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Time getHora() {
+        return hora;
+    }
+
+    public void setHora(Time hora) {
+        this.hora = hora;
     }
 
     public Double getValor() {
@@ -79,6 +90,5 @@ public class Lance {
     public void setVersao(Integer versao) {
         this.versao = versao;
     }
-    
-    
+
 }

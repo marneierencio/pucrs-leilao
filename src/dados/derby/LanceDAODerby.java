@@ -29,13 +29,14 @@ public class LanceDAODerby extends DAO implements LanceDAO {
         try {
             abrirConexao();
             try {
-                stmt = conexao.prepareStatement("INSERT INTO Lances (dataHora, valor, cod_usuario, cod_leilao, versao) VALUES (?, ?, ?, ?, ?) ",
+                stmt = conexao.prepareStatement("INSERT INTO Lances (data, hora, valor, cod_usuario, cod_leilao, versao) VALUES (?, ?, ?, ?, ?, ?) ",
                         Statement.RETURN_GENERATED_KEYS);
-                stmt.setDate(1, (Date) lance.getDataHora());
-                stmt.setDouble(2, lance.getValor());
-                stmt.setInt(3, lance.getUsuario().getCodigo());
-                stmt.setInt(4, lance.getLeilao().getCodigo());
-                stmt.setInt(5, 1);
+                stmt.setDate(1, (Date) lance.getData());
+                stmt.setTime(2, lance.getHora());
+                stmt.setDouble(3, lance.getValor());
+                stmt.setInt(4, lance.getUsuario().getCodigo());
+                stmt.setInt(5, lance.getLeilao().getCodigo());
+                stmt.setInt(6, 1);
 
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
@@ -67,7 +68,7 @@ public class LanceDAODerby extends DAO implements LanceDAO {
                     Usuario usuario = new UsuarioDAODerby().recuperar(rs.getInt("cod_cod_usuario"));
                     Leilao leilao = new LeilaoDAODerby().recuperar(rs.getInt("cod_leilao"));
                     
-                    lance = new Lance(rs.getInt("codigo"), rs.getDate("data_hora"), rs.getDouble("valor"), usuario, leilao, rs.getInt("versao"));
+                    lance = new Lance(rs.getInt("codigo"), rs.getDate("data"), rs.getTime("hora"), rs.getDouble("valor"), usuario, leilao, rs.getInt("versao"));
                 }
             } catch (SQLException e) {
                 throw new DAOException("Erro ao obter o registro. Causa: "
@@ -86,13 +87,14 @@ public class LanceDAODerby extends DAO implements LanceDAO {
             abrirConexao();
             if (recuperar(lance.getCodigo()).getVersao() == lance.getVersao()) {
                 try {
-                    stmt = conexao.prepareStatement("UPDATE Lances SET data_hora = ?, valor = ?, cod_usuario = ?, cod_leilao = ?, versao = ? WHERE codigo = ? ");
-                    stmt.setDate(1, (Date) lance.getDataHora());
-                    stmt.setDouble(2, lance.getValor());
-                    stmt.setInt(3, lance.getUsuario().getCodigo());
-                    stmt.setInt(4, lance.getLeilao().getCodigo());
-                    stmt.setInt(5, lance.getVersao() + 1);
-                    stmt.setInt(6, lance.getCodigo());
+                    stmt = conexao.prepareStatement("UPDATE Lances SET data = ?, hora = ?, valor = ?, cod_usuario = ?, cod_leilao = ?, versao = ? WHERE codigo = ? ");
+                    stmt.setDate(1, (Date) lance.getData());
+                    stmt.setTime(2, lance.getHora());
+                    stmt.setDouble(3, lance.getValor());
+                    stmt.setInt(4, lance.getUsuario().getCodigo());
+                    stmt.setInt(5, lance.getLeilao().getCodigo());
+                    stmt.setInt(6, lance.getVersao() + 1);
+                    stmt.setInt(7, lance.getCodigo());
 
                     lanceAtualizado = lance;
 
@@ -167,7 +169,7 @@ public class LanceDAODerby extends DAO implements LanceDAO {
                 while (rs.next()) {
                     Usuario u = new UsuarioDAODerby().recuperar(rs.getInt("cod_usuario"));
                     Leilao l = new LeilaoDAODerby().recuperar(rs.getInt("cod_leilao"));
-                    Lance lance = new Lance(rs.getInt("codigo"), rs.getDate("data_hora"), rs.getDouble("valor"), u, l, rs.getInt("versao"));
+                    Lance lance = new Lance(rs.getInt("codigo"), rs.getDate("data"), rs.getTime("hora"), rs.getDouble("valor"), u, l, rs.getInt("versao"));
                     lances.add(lance);
                 }
             } catch (SQLException e) {

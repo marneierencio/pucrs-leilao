@@ -5,7 +5,9 @@
  */
 package negocio.pojos;
 
+import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -16,27 +18,32 @@ public class Leilao {
     private Integer codigo;
     private Natureza natureza;
     private FormaLance formaLance;
-    private Date dataHoraInicio;
-    private Date dataHoraTermino;
+    private Date dataInicio;
+    private Time horaInicio;
+    private Date dataTermino;
+    private Time horaTermino;
     private Double preco;
     private Usuario usuario;
     private Lote lote;
+    private List<Lance> lances;
     private Integer versao;
 
     public Leilao() {
     }
 
-    public Leilao(Integer codigo, Natureza natureza, FormaLance formaLance, Date dataHoraInicio, Date dataHoraTermino, Double preco, Usuario usuario, Lote lote, Integer versao) {
+    public Leilao(Integer codigo, Natureza natureza, FormaLance formaLance, Date dataInicio, Time horaInicio, Date dataTermino, Time horaTermino, Double preco, Usuario usuario, Integer versao) {
         this.codigo = codigo;
         this.natureza = natureza;
         this.formaLance = formaLance;
-        this.dataHoraInicio = dataHoraInicio;
-        this.dataHoraTermino = dataHoraTermino;
+        this.dataInicio = dataInicio;
+        this.horaInicio = horaInicio;
+        this.dataTermino = dataTermino;
+        this.horaTermino = horaTermino;
         this.preco = preco;
         this.usuario = usuario;
-        this.lote = lote;
         this.versao = versao;
     }
+
 
     public Integer getCodigo() {
         return codigo;
@@ -62,22 +69,53 @@ public class Leilao {
         this.formaLance = formaLance;
     }
 
-    public Date getDataHoraInicio() {
-        return dataHoraInicio;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setDataHoraInicio(Date dataHoraInicio) {
-        this.dataHoraInicio = dataHoraInicio;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public Date getDataHoraTermino() {
-        return dataHoraTermino;
+    public Time getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setDataHoraTermino(Date dataHoraTermino) {
-        this.dataHoraTermino = dataHoraTermino;
+    public void setHoraInicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
+    public Date getDataTermino() {
+        return dataTermino;
+    }
+
+    public void setDataTermino(Date dataTermino) {
+        this.dataTermino = dataTermino;
+    }
+
+    public Time getHoraTermino() {
+        return horaTermino;
+    }
+
+    public void setHoraTermino(Time horaTermino) {
+        this.horaTermino = horaTermino;
+    }
+
+    public List<Lance> getLances() {
+        return lances;
+    }
+
+    public void setLances(List<Lance> lances) {
+        this.lances = lances;
+    }
+
+    public void addLance(Lance lance) {
+        this.lances.add(lance);
+    }
+    public void removeLance(Lance lance) {
+        this.lances.remove(lance);
+    }
+    
     public Double getPreco() {
         return preco;
     }

@@ -5,17 +5,18 @@
  */
 package gui;
 
+import dados.DAOException;
+
 /**
  *
  * @author Marnei
  */
-public class Start {
+class LeilaoControlador {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public LeilaoControlador() throws GuiException {
+        
+        
     }
+
     
 }

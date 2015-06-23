@@ -20,5 +20,5 @@ public interface ParametrosConexaoDAO {
 
     public ParametrosConexao recuperar() throws DAOException;
 
-    public ParametrosConexao atualizar(ParametrosConexao dadosConexao) throws DAOException;
+    public ParametrosConexao atualizar(ParametrosConexao parametrosConexao) throws DAOException;
 }

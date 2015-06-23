@@ -24,21 +24,13 @@ public class LeilaoFachada {
             throw new DAOException("Falha de criação da fachada!", e);
         }
     }
-//    public LeilaoFachada getInstance() throws NegocioException, DAOException{
-//	if(fachada == null){
-//	    fachada = new LeilaoFachada();
-//	}
-//	return fachada;
-//    }
     
-    public ParametrosConexao obterParametrosConexao() throws NegocioException{
-	ParametrosConexao pc = null;
-	try {
-	    pc = pcDAO.recuperar();
-	} catch (DAOException ex) {
-	    Logger.getLogger(LeilaoFachada.class.getName()).log(Level.SEVERE, null, ex);
-	}
-	//return fachada.obterParametrosConexao();
+    public ParametrosConexao obterParametrosConexao() throws NegocioException, DAOException{
+	ParametrosConexao pc = pcDAO.recuperar();
 	return pc;
+    }
+    
+    public ParametrosConexao atualizarParametrosConexao(ParametrosConexao parametrosConexao) throws DAOException{
+	return pcDAO.atualizar(parametrosConexao);
     }
 }

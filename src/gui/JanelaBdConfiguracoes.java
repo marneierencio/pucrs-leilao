@@ -5,9 +5,12 @@
  */
 package gui;
 
+import dados.DAOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import negocio.NegocioException;
 import negocio.pojos.ParametrosConexao;
 
 /**
@@ -15,17 +18,18 @@ import negocio.pojos.ParametrosConexao;
  * @author Marnei
  */
 public class JanelaBdConfiguracoes extends javax.swing.JFrame {
-
+    LeilaoControlador controlador;
     /**
      * Creates new form JanelaBdConfiguracoes
      * @throws gui.GuiException
      */
-    public JanelaBdConfiguracoes(LeilaoControlador controlador) throws GuiException {
-        initComponents();
-	preencherCampos(controlador);
-        
+    public JanelaBdConfiguracoes() throws GuiException, NegocioException, DAOException {
+        controlador = LeilaoControlador.getInstance();
+	initComponents();
+	preencherCampos();
+	
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,8 +146,17 @@ public class JanelaBdConfiguracoes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void preencherCampos(LeilaoControlador controlador){
-        ParametrosConexao pc = controlador.obterParametrosConexao();
+    private void preencherCampos(){
+        ParametrosConexao pc = null;
+	try {
+	    pc = controlador.obterParametrosConexao();
+	} catch (NegocioException ex) {
+	    Logger.getLogger(JanelaBdConfiguracoes.class.getName()).log(Level.SEVERE, null, ex);
+	    JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro na camada de negócios", JOptionPane.ERROR_MESSAGE);  
+	} catch (DAOException ex) {
+	    Logger.getLogger(JanelaBdConfiguracoes.class.getName()).log(Level.SEVERE, null, ex);
+	    JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro na camada de dados", JOptionPane.ERROR_MESSAGE);  
+	}
 	jTextFieldBdServidor.setText(pc.getBdServidor());
         jTextFieldBdPorta.setText(pc.getBdPorta().toString());
 	jTextFieldBdNome.setText(pc.getBdNome());
@@ -155,16 +168,19 @@ public class JanelaBdConfiguracoes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOkActionPerformed
-//        try{
-            //Salvar
-            this.dispose();
-//        } catch (GuiException ex) {
-//            Logger.getLogger(JanelaBdConfiguracoes.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
-//        }
-        
-        
-        
+	ParametrosConexao pc = new ParametrosConexao();
+	pc.setBdServidor(jTextFieldBdServidor.getText());
+	pc.setBdPorta(Integer.parseInt(jTextFieldBdPorta.getText()));
+	pc.setBdNome(jTextFieldBdNome.getText());
+	pc.setBdUsuario(jTextFieldBdUsuario.getText());
+	pc.setBdSenha(jPasswordFieldBdSenha.getText());
+	try {
+	    controlador.atualizarParametrosConexao(pc);
+	} catch (DAOException ex) {
+	    Logger.getLogger(JanelaBdConfiguracoes.class.getName()).log(Level.SEVERE, null, ex);
+	    JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro na camada de dados", JOptionPane.ERROR_MESSAGE);  
+	}
+        this.dispose();
     }//GEN-LAST:event_jButtonOkActionPerformed
 
     /**

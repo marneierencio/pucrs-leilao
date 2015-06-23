@@ -73,6 +73,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBancoDados.add(jSeparator3);
 
         jMenuItemBDCriar.setText("Criar banco da dados");
+        jMenuItemBDCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBDCriarActionPerformed(evt);
+            }
+        });
         jMenuBancoDados.add(jMenuItemBDCriar);
 
         jMenuItemBDPopular.setText("Popular banco de dados");
@@ -119,11 +124,22 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemBDConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBDConfiguracoesActionPerformed
         try {
-            new JanelaBdConfiguracoes(controlador).setVisible(true);
+	    try {
+		new JanelaBdConfiguracoes().setVisible(true);
+	    } catch (NegocioException ex) {
+		Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+	    } catch (DAOException ex) {
+		Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+	    }
         } catch (GuiException ex) {
             Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+	    JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro ao carregar a tela", JOptionPane.ERROR_MESSAGE);  
         }
     }//GEN-LAST:event_jMenuItemBDConfiguracoesActionPerformed
+
+    private void jMenuItemBDCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBDCriarActionPerformed
+        //controlador.criarBD();
+    }//GEN-LAST:event_jMenuItemBDCriarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,15 +173,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             public void run() {
                 try {
                     new JanelaPrincipal().setVisible(true);
-                } catch(GuiException ex) {
+                } catch(GuiException | NegocioException | DAOException ex) {
                     Logger.getLogger(JanelaBdConfiguracoes.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro fatal", JOptionPane.ERROR_MESSAGE);  
-                } catch (NegocioException ex) {
-		    Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (DAOException ex) {
-		    Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
 		}
-                
             }
         });
     }

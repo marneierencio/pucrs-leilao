@@ -35,6 +35,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Criar banco da dados"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemBDCriarActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBDPopular">
                   <Properties>

@@ -18,20 +18,24 @@ import negocio.pojos.ParametrosConexao;
  */
 class LeilaoControlador {
     LeilaoFachada fachada;
+    static LeilaoControlador controlador;
+    
+    static LeilaoControlador getInstance() throws GuiException, NegocioException, DAOException {
+	if(controlador == null)
+	    controlador = new LeilaoControlador();
+	return controlador;
+    }
     
     public LeilaoControlador() throws GuiException, NegocioException, DAOException {
         fachada = new LeilaoFachada();
     }
     
-    public ParametrosConexao obterParametrosConexao(){
-	ParametrosConexao pc = null;
-	try {
-	    pc = fachada.obterParametrosConexao();
-	} catch (NegocioException ex) {
-	    Logger.getLogger(LeilaoControlador.class.getName()).log(Level.SEVERE, null, ex);
-	}
+    public ParametrosConexao obterParametrosConexao() throws NegocioException, DAOException{
+	ParametrosConexao pc = fachada.obterParametrosConexao();
 	return pc;
     }
 
-    
+    public ParametrosConexao atualizarParametrosConexao(ParametrosConexao parametrosConexao) throws DAOException {
+	return fachada.atualizarParametrosConexao(parametrosConexao);
+    }
 }

@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dados.derby;
+package dados;
 
-import dados.DAO;
-import dados.DAOException;
-import dados.UsuarioDAO;
+import negocio.UsuarioDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,7 +18,22 @@ import negocio.pojos.Usuario;
  * @author Marnei
  */
 public class UsuarioDAODerby extends DAO implements UsuarioDAO {
-
+    private static UsuarioDAODerby ref;
+    
+    public static UsuarioDAODerby getInstance() throws DAOException {
+        if (ref == null)
+            ref = new UsuarioDAODerby();
+        return ref;
+    }
+    
+    UsuarioDAODerby() throws DAOException {
+        try {
+             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        } catch (ClassNotFoundException ex) {
+            throw new DAOException("JdbcOdbDriver not found!!");
+        }
+    }
+    
     @Override
     public Usuario criar(Usuario usuario) throws DAOException {
         try {

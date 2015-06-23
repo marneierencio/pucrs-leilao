@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dados.derby;
+package dados;
 
-import dados.LanceDAO;
+import negocio.LanceDAO;
 import dados.DAO;
 import dados.DAOException;
 import java.sql.Date;
@@ -23,7 +23,23 @@ import negocio.pojos.Usuario;
  * @author Marnei
  */
 public class LanceDAODerby extends DAO implements LanceDAO {
-
+    
+    private static LanceDAODerby ref;
+    
+    public static LanceDAODerby getInstance() throws DAOException {
+        if (ref == null)
+            ref = new LanceDAODerby();
+        return ref;
+    }
+    
+    LanceDAODerby() throws DAOException {
+        try {
+             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        } catch (ClassNotFoundException ex) {
+            throw new DAOException("JdbcOdbDriver not found!!");
+        }
+    }
+    
     @Override
     public Lance criar(Lance lance) throws DAOException {
         try {

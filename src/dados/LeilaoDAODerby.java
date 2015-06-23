@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dados.derby;
+package dados;
 
-import dados.LeilaoDAO;
+import negocio.LeilaoDAO;
 import dados.DAO;
 import dados.DAOException;
 import java.sql.Date;
@@ -25,6 +25,22 @@ import negocio.pojos.Usuario;
  */
 public class LeilaoDAODerby  extends DAO implements LeilaoDAO {
 
+    private static LeilaoDAODerby ref;
+    
+    public static LeilaoDAODerby getInstance() throws DAOException {
+        if (ref == null)
+            ref = new LeilaoDAODerby();
+        return ref;
+    }
+    
+    LeilaoDAODerby() throws DAOException {
+        try {
+             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        } catch (ClassNotFoundException ex) {
+            throw new DAOException("JdbcOdbDriver not found!!");
+        }
+    }
+    
     @Override
     public Leilao criar(Leilao leilao) throws DAOException {
         try {

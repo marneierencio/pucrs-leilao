@@ -14,6 +14,42 @@
                 <Property name="text" type="java.lang.String" value="Login..."/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="jMenuBancoDados">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Banco de dados"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBDConfiguracoes">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es..."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemBDConfiguracoesActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBDCriar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Criar banco da dados"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBDPopular">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Popular banco de dados"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBdRecriar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Recriar banco da dados"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSair">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>

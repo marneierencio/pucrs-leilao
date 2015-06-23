@@ -5,8 +5,12 @@
  */
 package gui;
 
+import dados.DAOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import negocio.NegocioException;
 
 /**
  *
@@ -18,7 +22,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
      * Creates new form JanelaPrincipal
      * @throws gui.GuiException
      */
-    public JanelaPrincipal() throws GuiException {
+    public JanelaPrincipal() throws GuiException, NegocioException, DAOException {
         controlador = new LeilaoControlador();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
@@ -36,6 +40,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemLogin = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuBancoDados = new javax.swing.JMenu();
+        jMenuItemBDConfiguracoes = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemBDCriar = new javax.swing.JMenuItem();
+        jMenuItemBDPopular = new javax.swing.JMenuItem();
+        jMenuItemBdRecriar = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -47,6 +59,30 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jMenuItemLogin.setText("Login...");
         jMenu1.add(jMenuItemLogin);
+        jMenu1.add(jSeparator1);
+
+        jMenuBancoDados.setText("Banco de dados");
+
+        jMenuItemBDConfiguracoes.setText("Configurações...");
+        jMenuItemBDConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBDConfiguracoesActionPerformed(evt);
+            }
+        });
+        jMenuBancoDados.add(jMenuItemBDConfiguracoes);
+        jMenuBancoDados.add(jSeparator3);
+
+        jMenuItemBDCriar.setText("Criar banco da dados");
+        jMenuBancoDados.add(jMenuItemBDCriar);
+
+        jMenuItemBDPopular.setText("Popular banco de dados");
+        jMenuBancoDados.add(jMenuItemBDPopular);
+
+        jMenuItemBdRecriar.setText("Recriar banco da dados");
+        jMenuBancoDados.add(jMenuItemBdRecriar);
+
+        jMenu1.add(jMenuBancoDados);
+        jMenu1.add(jSeparator2);
 
         jMenuItemSair.setText("Sair");
         jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +117,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSairActionPerformed
 
+    private void jMenuItemBDConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBDConfiguracoesActionPerformed
+        try {
+            new JanelaBdConfiguracoes(controlador).setVisible(true);
+        } catch (GuiException ex) {
+            Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemBDConfiguracoesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -113,9 +157,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             public void run() {
                 try {
                     new JanelaPrincipal().setVisible(true);
-                } catch(GuiException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erro fatal", JOptionPane.ERROR_MESSAGE);  
-                }
+                } catch(GuiException ex) {
+                    Logger.getLogger(JanelaBdConfiguracoes.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro fatal", JOptionPane.ERROR_MESSAGE);  
+                } catch (NegocioException ex) {
+		    Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (DAOException ex) {
+		    Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+		}
                 
             }
         });
@@ -124,9 +173,17 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenuBancoDados;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemBDConfiguracoes;
+    private javax.swing.JMenuItem jMenuItemBDCriar;
+    private javax.swing.JMenuItem jMenuItemBDPopular;
+    private javax.swing.JMenuItem jMenuItemBdRecriar;
     private javax.swing.JMenuItem jMenuItemLogin;
     private javax.swing.JMenuItem jMenuItemSair;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     // End of variables declaration//GEN-END:variables
     private LeilaoControlador controlador;
 }

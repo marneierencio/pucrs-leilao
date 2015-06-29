@@ -5,6 +5,7 @@
  */
 package negocio;
 
+import dados.BemDAODerby;
 import dados.DAOException;
 import java.util.List;
 import negocio.pojos.Bem;
@@ -15,13 +16,17 @@ import negocio.pojos.Bem;
  */
 public interface BemDAO {
 
-    public Bem criar(Bem bem) throws DAOException;
+	public static BemDAO getInstance() throws DAOException {
+		return BemDAODerby.getInstance();
+	}
 
-    public Bem recuperar(Integer codigo) throws DAOException;
+	public Bem criar(Bem bem) throws DAOException;
 
-    public Bem atualizar(Bem bem) throws DAOException;
+	public Bem recuperar(Integer codigo) throws DAOException;
 
-    public Bem remover(Bem bem) throws DAOException;
-    
-    public List<Bem> listar(Bem criterio) throws DAOException;
+	public Bem atualizar(Bem bem) throws DAOException;
+
+	public Bem remover(Bem bem) throws DAOException;
+
+	public List<Bem> listar(Bem criterio) throws DAOException;
 }

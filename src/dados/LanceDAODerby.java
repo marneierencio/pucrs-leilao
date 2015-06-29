@@ -33,11 +33,7 @@ public class LanceDAODerby extends DAO implements LanceDAO {
     }
     
     LanceDAODerby() throws DAOException {
-        try {
-             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException ex) {
-            throw new DAOException("JdbcOdbDriver not found!!");
-        }
+
     }
     
     @Override

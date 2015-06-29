@@ -6,6 +6,7 @@
 package negocio;
 
 import dados.DAOException;
+import dados.LanceDAODerby;
 import java.util.List;
 import negocio.pojos.Lance;
 
@@ -14,6 +15,9 @@ import negocio.pojos.Lance;
  * @author Marnei
  */
 public interface LanceDAO {
+	public static LanceDAO getInstance() throws DAOException {
+		return LanceDAODerby.getInstance();
+	}
 
     public Lance criar(Lance lance) throws DAOException;
 

@@ -6,6 +6,7 @@
 package negocio;
 
 import dados.DAOException;
+import dados.UsuarioDAODerby;
 import java.util.List;
 import negocio.pojos.Usuario;
 
@@ -15,13 +16,17 @@ import negocio.pojos.Usuario;
  */
 public interface UsuarioDAO {
 
-    public Usuario criar(Usuario Usuario) throws DAOException;
+	public static UsuarioDAO getInstance() throws DAOException {
+		return UsuarioDAODerby.getInstance();
+	}
 
-    public Usuario recuperar(Integer codigo) throws DAOException;
+	public Usuario criar(Usuario Usuario) throws DAOException;
 
-    public Usuario atualizar(Usuario usuario) throws DAOException;
+	public Usuario recuperar(Integer codigo) throws DAOException;
 
-    public Usuario remover(Usuario usuario) throws DAOException;
+	public Usuario atualizar(Usuario usuario) throws DAOException;
 
-    public List<Usuario> listar(Usuario criterio) throws DAOException;
+	public Usuario remover(Usuario usuario) throws DAOException;
+
+	public List<Usuario> listar(Usuario criterio) throws DAOException;
 }

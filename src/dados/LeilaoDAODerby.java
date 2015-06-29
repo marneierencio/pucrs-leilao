@@ -24,7 +24,6 @@ import negocio.pojos.Usuario;
  * @author Marnei
  */
 public class LeilaoDAODerby  extends DAO implements LeilaoDAO {
-
     private static LeilaoDAODerby ref;
     
     public static LeilaoDAODerby getInstance() throws DAOException {
@@ -34,12 +33,8 @@ public class LeilaoDAODerby  extends DAO implements LeilaoDAO {
     }
     
     LeilaoDAODerby() throws DAOException {
-        try {
-             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException ex) {
-            throw new DAOException("JdbcOdbDriver not found!!");
-        }
-    }
+
+	}
     
     @Override
     public Leilao criar(Leilao leilao) throws DAOException {
@@ -96,7 +91,7 @@ public class LeilaoDAODerby  extends DAO implements LeilaoDAO {
                 if (rs.next()) {
                     Natureza n;
                     FormaLance f;
-                    Usuario u = new UsuarioDAODerby().recuperar(rs.getInt("cod_cod_usuario"));
+                    Usuario u = new UsuarioDAODerby().recuperar(rs.getInt("cod_usuario"));
                     if("DEMANDA".equals(rs.getString("natureza")))
                         n = Natureza.DEMANDA;
                     else

@@ -10,20 +10,21 @@ package negocio.pojos;
  * @author Marnei
  */
 public class Bem{
-
     private Integer codigo;
     private String descricao;
     private String descricaoDetalhada;
+    private Lote lote;
     private Categoria categoria;
     private Integer versao;
 
     public Bem() {
     }
 
-    public Bem(Integer codigo, String descricao, String descricaoDetalhada, Categoria categoria, Integer versao) {
+    public Bem(Integer codigo, String descricao, String descricaoDetalhada, Lote lote, Categoria categoria, Integer versao) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.descricaoDetalhada = descricaoDetalhada;
+	this.lote = lote;
         this.categoria = categoria;
         this.versao = versao;
     }
@@ -50,6 +51,14 @@ public class Bem{
 
     public void setDescricaoDetalhada(String descricaoDetalhada) {
         this.descricaoDetalhada = descricaoDetalhada;
+    }
+
+    public Lote getLote() {
+	return lote;
+    }
+
+    public void setLote(Lote lote) {
+	this.lote = lote;
     }
 
     public Categoria getCategoria() {

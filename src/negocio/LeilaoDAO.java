@@ -6,6 +6,7 @@
 package negocio;
 
 import dados.DAOException;
+import dados.LeilaoDAODerby;
 import java.util.List;
 import negocio.pojos.Leilao;
 
@@ -14,6 +15,10 @@ import negocio.pojos.Leilao;
  * @author Marnei
  */
 public interface LeilaoDAO {
+
+	public static LeilaoDAO getInstance() throws DAOException{
+		return LeilaoDAODerby.getInstance();
+	}
     public Leilao criar(Leilao leilao) throws DAOException;
 
     public Leilao recuperar(Integer codigo) throws DAOException;

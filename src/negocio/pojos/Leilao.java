@@ -44,7 +44,6 @@ public class Leilao {
         this.versao = versao;
     }
 
-
     public Integer getCodigo() {
         return codigo;
     }
@@ -112,6 +111,7 @@ public class Leilao {
     public void addLance(Lance lance) {
         this.lances.add(lance);
     }
+	
     public void removeLance(Lance lance) {
         this.lances.remove(lance);
     }
@@ -119,15 +119,15 @@ public class Leilao {
     public Double getPreco() {
         return preco;
     }
-
+	
     public void setPreco(Double preco) {
         this.preco = preco;
     }
-
+	
     public Usuario getUsuario() {
         return usuario;
     }
-
+	
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -147,6 +147,4 @@ public class Leilao {
     public void setVersao(Integer versao) {
         this.versao = versao;
     }
-    
-    
 }

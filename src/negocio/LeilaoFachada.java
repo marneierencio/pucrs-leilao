@@ -68,23 +68,25 @@ public class LeilaoFachada {
 		u.setEmail(email);
 		try {
 			u = cadUsuarios.listar(u).get(0);
-			if(u.getSenha().equals(senha)){
+			if (u.getSenha().equals(senha)) {
 				return u;
 			}
-		} catch (IndexOutOfBoundsException ex){
+		} catch (IndexOutOfBoundsException ex) {
 			u = null;
 		}
 		return null;
 	}
 
 	public Usuario salvarUsuario(Usuario usuario) throws DAOException {
-		if(usuario.getCodigo() == null)
-			if(cadUsuarios.listar(new Usuario(null, null, null, usuario.getEmail(), null, null)).isEmpty())
+		if (usuario.getCodigo() == null) {
+			if (cadUsuarios.listar(new Usuario(null, null, null, usuario.getEmail(), null, null)).isEmpty()) {
 				usuario = cadUsuarios.criar(usuario);
-			else
-				throw new DAOException("Este e-mail já foi cadastrado."); 
-		else
+			} else {
+				throw new DAOException("Este e-mail já foi cadastrado.");
+			}
+		} else {
 			usuario = cadUsuarios.atualizar(usuario);
+		}
 		return usuario;
 	}
 
@@ -95,17 +97,19 @@ public class LeilaoFachada {
 	}
 
 	public Categoria salvarCategoria(Categoria cat) throws DAOException {
-		if(cat.getCodigo() != null){
+		if (cat.getCodigo() != null) {
 			return cadCategorias.atualizar(cat);
-		}
-		else
-		{
+		} else {
 			return cadCategorias.criar(cat);
 		}
 	}
-	
-	public List<Categoria> listarCategorias(Categoria criterio) throws DAOException{
+
+	public List<Categoria> listarCategorias(Categoria criterio) throws DAOException {
 		return cadCategorias.listar(criterio);
+	}
+
+	public List<Leilao> listarLeiloesEmAndamento() throws DAOException {
+		return cadLeiloes.listarEmAndamento();
 	}
 
 }

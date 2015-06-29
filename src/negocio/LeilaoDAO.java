@@ -28,4 +28,6 @@ public interface LeilaoDAO {
     public Leilao remover(Leilao leilao) throws DAOException;
     
     public List<Leilao> listar(Leilao criterio) throws DAOException;
+
+	public List<Leilao> listarEmAndamento() throws DAOException;
 }

@@ -74,8 +74,9 @@ class LeilaoControlador {
 		return usuarioLogado;
 	}
 	
-	public void listarLeiloesEmAndamento(){
-		//fachada.listarLeiloes();
+	public List<Leilao> listarLeiloesEmAndamento() throws DAOException {
+		
+		return fachada.listarLeiloesEmAndamento();
 	}
 	
 	public void listarMeusLeiloes() throws DAOException{

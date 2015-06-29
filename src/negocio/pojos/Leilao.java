@@ -6,8 +6,10 @@
 package negocio.pojos;
 
 import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.apache.derby.client.am.DateTime;
 
 /**
  *
@@ -84,6 +86,17 @@ public class Leilao {
         this.horaInicio = horaInicio;
     }
 
+    public Calendar getInicio() {
+        Calendar cal = null;
+        cal.set(dataInicio.getYear(),
+                dataInicio.getMonth(),
+                dataInicio.getDay(),
+                horaInicio.getHours(),
+                horaInicio.getMinutes(),
+                horaInicio.getSeconds());
+        return cal;
+    }
+
     public Date getDataTermino() {
         return dataTermino;
     }
@@ -100,6 +113,17 @@ public class Leilao {
         this.horaTermino = horaTermino;
     }
 
+    public Calendar getTermino() {
+        Calendar cal = null;
+        cal.set(dataTermino.getYear(),
+                dataTermino.getMonth(),
+                dataTermino.getDay(),
+                horaTermino.getHours(),
+                horaTermino.getMinutes(),
+                horaTermino.getSeconds());
+        return cal;
+    }
+
     public List<Lance> getLances() {
         return lances;
     }
@@ -111,23 +135,23 @@ public class Leilao {
     public void addLance(Lance lance) {
         this.lances.add(lance);
     }
-	
+
     public void removeLance(Lance lance) {
         this.lances.remove(lance);
     }
-    
+
     public Double getPreco() {
         return preco;
     }
-	
+
     public void setPreco(Double preco) {
         this.preco = preco;
     }
-	
+
     public Usuario getUsuario() {
         return usuario;
     }
-	
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }

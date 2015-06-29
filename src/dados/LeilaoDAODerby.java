@@ -320,7 +320,7 @@ public class LeilaoDAODerby extends DAO implements LeilaoDAO {
 				}
 			} catch (SQLException e) {
 				throw new DAOException("Erro ao obter os registros. Causa: "
-					+ e.getMessage(), e);
+					+ e.getMessage() + " \nSe esta é a primeira vez que você executa o programa, entre em configurações, crie e popule as tabelas.", e);
 			}
 		} finally {
 			fecharConexao();

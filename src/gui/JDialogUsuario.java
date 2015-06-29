@@ -6,10 +6,7 @@
 package gui;
 
 import dados.DAOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import negocio.NegocioException;
 import negocio.pojos.Usuario;
 
 /**
